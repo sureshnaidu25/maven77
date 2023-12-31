@@ -5,7 +5,7 @@ pipeline
     agent any
     stages
     {
-        stage('ContDownload_master')
+        stage('ContDownload_loans')
         {
             steps
             {
@@ -15,44 +15,13 @@ pipeline
                 }
             }
         }
-        stage('ContBuild_master')
+        stage('ContBuild_loans')
         {
             steps
             {
                 script
                 {
                     cicd.newBuild()
-                }
-            }
-        }
-        stage('ContDeployment_master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.newDeploy("DeclarativepipelinewithSharedLibraries","172.31.35.44","testapp4")
-                }
-            }
-        }
-        stage('ContTesting_master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.newDownload("FunctionalTesting.git")
-                    cicd.runSelenium("DeclarativepipelinewithSharedLibraries")
-                }
-            }
-        }
-        stage('ContDelivery_master')
-        {
-            steps
-            {
-                script
-                {
-                    cicd.newDeploy("DeclarativepipelinewithSharedLibraries","172.31.46.54","prodapp4")
                 }
             }
         }
